@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <title>Закадровий UA</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <img src="../icons/icon32.png" alt="" width="28" height="28">
+    <div class="title">
+      <strong>Закадровий UA</strong>
+      <span>озвучення відео українською</span>
+    </div>
+    <label class="switch" title="Alt+Shift+U">
+      <input type="checkbox" id="enabled">
+      <span></span>
+    </label>
+  </header>
+
+  <section class="status" id="statusBox">
+    <div class="dot" id="statusDot"></div>
+    <p id="status">Відкрийте відео на YouTube</p>
+  </section>
+
+  <button id="genericBtn" class="primary" hidden>Озвучити відео на цій сторінці</button>
+
+  <section>
+    <h2>Режим</h2>
+    <div class="seg" role="radiogroup">
+      <label><input type="radio" name="mode" value="youtube"><span>Субтитри YouTube<small>автопереклад YouTube → голос</small></span></label>
+      <label><input type="radio" name="mode" value="translate"><span>Власний переклад<small>оригінал → перекладач → голос</small></span></label>
+    </div>
+    <div id="translatorRow" class="row">
+      <label for="translator">Перекладач</label>
+      <select id="translator">
+        <option value="google">Google Перекладач (безкоштовно)</option>
+        <option value="deepl">DeepL (API-ключ)</option>
+        <option value="claude">Claude (API-ключ)</option>
+      </select>
+    </div>
+    <div id="trTestRow">
+      <button id="trTestBtn" class="ghost">Перевірити перекладач</button>
+      <p class="hint" id="trTestOut"></p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Голос</h2>
+    <div class="row">
+      <label for="voiceEngine">Синтезатор</label>
+      <select id="voiceEngine">
+        <option value="auto">Авто</option>
+        <option value="system">Системний голос</option>
+        <option value="google">Google (онлайн)</option>
+      </select>
+    </div>
+    <div class="row" id="voiceRow">
+      <label for="voiceName">Голос</label>
+      <select id="voiceName"></select>
+    </div>
+    <p class="hint" id="voiceHint"></p>
+
+    <div class="slider">
+      <label for="rate">Швидкість <output id="rateOut"></output></label>
+      <input type="range" id="rate" min="0.8" max="1.8" step="0.05">
+    </div>
+    <div class="slider">
+      <label for="volume">Гучність голосу <output id="volumeOut"></output></label>
+      <input type="range" id="volume" min="0" max="1" step="0.05">
+    </div>
+    <div class="slider">
+      <label for="duck">Оригінал під час мовлення <output id="duckOut"></output></label>
+      <input type="range" id="duck" min="0" max="1" step="0.05">
+    </div>
+    <label class="check"><input type="checkbox" id="adaptive"> Прискорювати голос, якщо не встигає за відео</label>
+    <label class="check"><input type="checkbox" id="overlay"> Показувати текст, що озвучується</label>
+    <button id="testBtn" class="ghost">▶ Прослухати голос</button>
+  </section>
+
+  <details id="keys">
+    <summary>Ключі API</summary>
+    <div class="row col">
+      <label for="deeplKey">DeepL API key</label>
+      <input type="password" id="deeplKey" placeholder="xxxxxxxx-…:fx" autocomplete="off">
+    </div>
+    <div class="row col">
+      <label for="claudeKey">Anthropic (Claude) API key</label>
+      <input type="password" id="claudeKey" placeholder="sk-ant-…" autocomplete="off">
+    </div>
+    <div class="row col">
+      <label for="claudeModel">Модель Claude</label>
+      <input type="text" id="claudeModel" spellcheck="false">
+    </div>
+    <p class="hint">Ключі зберігаються лише локально в цьому браузері й надсилаються тільки відповідному сервісу.</p>
+  </details>
+
+  <footer>Alt+Shift+U — увімкнути / вимкнути</footer>
+  <script src="../shared/settings.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
